@@ -32,7 +32,7 @@ void addfd(int epoll_fd, int fd)
 bool write_nbytes(int sockfd, const char* buffer, int len)
 {
     int bytes_write = 0;
-    std::cout << "write out " << len << "bytes to socket %d\n" << sockfd << "\n";
+    //std::cout << "write out " << len << "bytes to socket %d\n" << sockfd << "\n";
     while (1)
     {
         bytes_write = send(sockfd, buffer, len, 0);
@@ -66,7 +66,7 @@ bool read_once(int sockfd, char* buffer, int len)
     {
         return false;
     }
-    std::cout << "read in " << bytes_read << "bytes from socket " << sockfd << " with content:" << buffer << "\n";
+    std::cout << buffer << "\n";
     return true;
 }
 

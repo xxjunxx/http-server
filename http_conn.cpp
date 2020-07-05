@@ -64,8 +64,8 @@ void http_conn::init(int sockfd, const sockaddr_in& addr)
     m_sockfd = sockfd;
     m_address = addr;
     // 避免TIME_WAIT,仅用于调试
-    int reuse = 1;
-    setsockopt(m_sockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
+    //int reuse = 1;
+    //setsockopt(m_sockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
     addfd(m_epollfd, sockfd, true);
     m_user_count++;
 
@@ -307,7 +307,6 @@ http_conn::HTTP_CODE http_conn::process_read()
 http_conn::HTTP_CODE http_conn::do_request()
 {
     strcpy(m_real_file, doc_root);
-    std::cout << m_real_file << "\n";
     int len = strlen(doc_root);
     strncpy(m_real_file + len, m_url, FILENAME_LEN - len - 1);
     if (stat(m_real_file, &m_file_stat) < 0)
@@ -363,6 +362,8 @@ bool http_conn::write()
             unmap();
             return false;
         }
+        std::cout << "send success\n";
+        
         bytes_to_send -= temp;
         bytes_have_send += temp;
         if (bytes_to_send <= 0)

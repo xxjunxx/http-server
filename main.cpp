@@ -101,7 +101,6 @@ int main(int argc, char* argv[])
             std::cout << "epoll failure\n";
             break;
         }
-
         for (int i = 0; i < number; i++)
         {
             int sockfd = events[i].data.fd;
@@ -141,7 +140,6 @@ int main(int argc, char* argv[])
             {
                 if (!users[sockfd].write())
                 {
-                    std::cout<< "write error\n";
                     users[sockfd].close_conn();
                 }
             }
